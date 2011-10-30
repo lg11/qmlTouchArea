@@ -4,26 +4,23 @@ QT += declarative
 CONFIG += qt plugin
 
 TARGET = $$qtLibraryTarget($$TARGET)
-uri = me.toucharea
+uri = me.utils.toucharea
 
 # Input
 SOURCES += \
-    plugin.cpp \
+    src/plugin.cpp \
 
 HEADERS += \
-    plugin.h \
-    toucharea.h
+    src/plugin.h \
+    src/toucharea.h
 
-OTHER_FILES = qmldir \
-    FakeTouchArea.qml \
-    RootTouchArea.qml \
-    RealTouchArea.qml \
-    qtc_packaging/debian_harmattan/rules \
-    qtc_packaging/debian_harmattan/README \
-    qtc_packaging/debian_harmattan/copyright \
-    qtc_packaging/debian_harmattan/control \
-    qtc_packaging/debian_harmattan/compat \
-    qtc_packaging/debian_harmattan/changelog \
+OTHER_FILES = qml/qmldir \
+    qml/FakeTouchArea.qml \
+    qml/RootTouchArea.qml \
+    qml/RealTouchArea.qml
+
+OBJECTS_DIR = tmp
+MOC_DIR = tmp
 
 !equals(_PRO_FILE_PWD_, $$OUT_PWD) {
     copy_qmldir.target = $$OUT_PWD/qmldir
@@ -33,7 +30,7 @@ OTHER_FILES = qmldir \
     PRE_TARGETDEPS += $$copy_qmldir.target
 }
 
-qmldir.files = qmldir FakeTouchArea.qml RootTouchArea.qml RealTouchArea.qml \
+qmldir.files = qml/qmldir qml/FakeTouchArea.qml qml/RootTouchArea.qml qml/RealTouchArea.qml
 
 symbian {
     TARGET.EPOCALLOWDLLDATA = 1
