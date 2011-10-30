@@ -25,14 +25,16 @@ Item {
         return target
     }
 
-    function enter( target ) {
+    function enter( count, target ) {
         if ( target.count <= 0 ) {
             target.entered()
         }
-        target.count += 1
+        if ( target.count < count ) {
+            target.count += 1
+        }
     }
 
-    function leave( target ) {
+    function leave( count, target ) {
         if ( target.count > 0 ) {
             target.count -= 1
         }
@@ -41,29 +43,29 @@ Item {
         }
     }
 
-    function pressed ( x, y ) {
+    function pressed ( count, x, y ) {
         var target = getFocus( x, y )
         if ( target ) {
-            enter( target )
+            enter( count, target )
         }
     }
 
-    function released ( x, y ) {
+    function released ( count, x, y ) {
         var target = getFocus( x, y )
         if ( target ) {
-            leave( target )
+            leave( count, target )
         }
     }
 
-    function moved ( currentX, currentY, lastX, lastY ) {
+    function moved ( count, currentX, currentY, lastX, lastY ) {
         var currentTarget = getFocus( currentX, currentY )
                 var lastTarget = getFocus( lastX, lastY )
         if ( currentTarget != lastTarget ) {
             if ( lastTarget ) {
-                leave( lastTarget )
+                leave( count, lastTarget )
             }
             if ( currentTarget ) {
-                enter( currentTarget )
+                enter( count, currentTarget )
             }
         }
     }

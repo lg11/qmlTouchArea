@@ -8,9 +8,9 @@
 class TouchArea : public QDeclarativeItem {
     Q_OBJECT
 signals :
-    void pressed( int id, qreal x ,qreal y ) ;
-    void moved( int id, qreal currentX, qreal currentY, qreal lastX, qreal lastY ) ;
-    void released( int id, qreal x, qreal y ) ;
+    void pressed( int id, int count, qreal x ,qreal y ) ;
+    void moved( int id, int count, qreal currentX, qreal currentY, qreal lastX, qreal lastY ) ;
+    void released( int id, int count, qreal x, qreal y ) ;
     //void stationary( int id, qreal x, qreal y ) ;
 
 public:
@@ -26,14 +26,14 @@ public:
         foreach( const QTouchEvent::TouchPoint& point, points ) {
             switch( point.state() ) {
                 case Qt::TouchPointPressed :
-                    emit this->pressed( point.id(), point.pos().rx(), point.pos().ry() ) ;
+                    emit this->pressed( point.id(), points.count(), point.pos().rx(), point.pos().ry() ) ;
                     break ;
                 case Qt::TouchPointMoved :
                     if ( point.lastPos() != point.pos() )
-                        emit this->moved( point.id(), point.pos().rx(), point.pos().ry(), point.lastPos().rx(), point.lastPos().ry() ) ;
+                        emit this->moved( point.id(), points.count(), point.pos().rx(), point.pos().ry(), point.lastPos().rx(), point.lastPos().ry() ) ;
                     break ;
                 case Qt::TouchPointReleased :
-                    emit this->released( point.id(), point.pos().rx(), point.pos().ry() ) ;
+                    emit this->released( point.id(), points.count(), point.pos().rx(), point.pos().ry() ) ;
                     break ;
                 default :
                     break ;

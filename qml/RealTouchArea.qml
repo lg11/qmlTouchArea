@@ -5,13 +5,13 @@ RootTouchArea {
     TouchArea {
         anchors.fill : parent
         onPressed : {
-            parent.pressed( x, y )
+            parent.pressed( count, x, y )
         }
         onReleased : {
-            parent.released( x, y )
+            parent.released( count, x, y )
         }
         onMoved : {
-            parent.moved( currentX, currentY, lastX, lastY )
+            parent.moved( count, currentX, currentY, lastX, lastY )
         }
     }
 }
