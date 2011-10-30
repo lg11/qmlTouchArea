@@ -69,4 +69,17 @@ Item {
             }
         }
     }
+
+    TouchArea {
+        anchors.fill : parent
+        onPressed : {
+            parent.pressed( count, x, y )
+        }
+        onReleased : {
+            parent.released( count, x, y )
+        }
+        onMoved : {
+            parent.moved( count, currentX, currentY, lastX, lastY )
+        }
+    }
 }
