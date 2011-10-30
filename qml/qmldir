@@ -1,0 +1,5 @@
+plugin toucharea
+FakeTouchArea FakeTouchArea.qml
+RootTouchArea RootTouchArea.qml
+RealTouchArea RealTouchArea.qml
+
