@@ -43,6 +43,15 @@ Item {
         }
     }
 
+    function release( count, target ) {
+        if ( target.count > 0 ) {
+            target.count -= 1
+        }
+        if ( target.count <= 0 ) {
+            target.released()
+        }
+    }
+
     function pressed ( count, x, y ) {
         var target = getFocus( x, y )
         if ( target ) {
@@ -53,7 +62,7 @@ Item {
     function released ( count, x, y ) {
         var target = getFocus( x, y )
         if ( target ) {
-            leave( count, target )
+            release( count, target )
         }
     }
 
